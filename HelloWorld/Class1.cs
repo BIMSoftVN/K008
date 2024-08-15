@@ -8,8 +8,6 @@ namespace HelloWorld
 {
     public class Class1
     {
-        public int Id { get; set; }
-        public int Id2 { get; set; }
-        public int Id3 { get; set; }
+        
     }
 }
