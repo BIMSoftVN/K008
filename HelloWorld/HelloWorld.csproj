@@ -57,9 +57,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CauLenhIf.cs" />
+    <Compile Include="CauLenhSwitch.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="clConNguoi.cs" />
+    <Compile Include="clHinhHoc.cs" />
     <Compile Include="HelloWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToanTu.cs" />
+    <Compile Include="VongLapFor.cs" />
+    <Compile Include="VongLapWhile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
