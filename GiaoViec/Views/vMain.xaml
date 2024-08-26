@@ -1,0 +1,26 @@
+﻿<Window x:Class="GiaoViec.Views.vMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GiaoViec.Views"
+        mc:Ignorable="d"
+        Title="vMain" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel></StackPanel>
+
+        <Grid Grid.Column="1">
+            <Border Opacity="0.5">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Photo/6027811.jpg" Stretch="UniformToFill"/>
+                </Border.Background>
+            </Border>
+            
+        </Grid>
+    </Grid>
+</Window>
