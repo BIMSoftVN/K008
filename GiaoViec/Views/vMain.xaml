@@ -5,22 +5,182 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GiaoViec.Views"
         mc:Ignorable="d"
-        Title="vMain" Height="450" Width="800">
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="vMain" Height="800" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel></StackPanel>
+        <StackPanel>
+            <Menu Margin="5">
+                <MenuItem Header="File">
+                    <MenuItem Header="New"/>
+                    <MenuItem Header="Open"/>
+                    <MenuItem Header="Save"/>
+                    <Separator/>
+                    <MenuItem Header="Exit"/>
+                </MenuItem>
+
+
+                <MenuItem Header="Edit"/>
+                <MenuItem Header="Help"/>
+            </Menu>
+
+            <Ribbon>
+                <RibbonTab Header="Home">
+                   
+                    
+                    <RibbonGroup Header="Clipboard">
+
+                        <RibbonButton 
+Label="Copy"
+LargeImageSource="/Photo/OK.png"/>
+                        
+                        
+                        <RibbonButton 
+                            Label="Copy"
+                            SmallImageSource="/Photo/OK.png"/>
+
+                        <RibbonButton 
+    Label="Copy"
+    SmallImageSource="/Photo/OK.png"/>
+
+                        <RibbonButton 
+    Label="Copy"
+    SmallImageSource="/Photo/OK.png"/>
+                    </RibbonGroup>
+                </RibbonTab>
+
+                <RibbonTab Header="Chỉnh sửa">
+
+                </RibbonTab>
+            </Ribbon>
+
+            <Border Width="100" Height="100" 
+CornerRadius="50">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Photo/photo.jpg"/>
+                </Border.Background>
+
+            </Border>
+
+
+            <Slider Minimum="0" Maximum="100"
+                    Value="30">
+                
+            </Slider>
+
+            <ProgressBar Minimum="0" Maximum="100"
+                         Value="50"
+                         Height="25"
+                         Margin="10">
+                
+            </ProgressBar>
+
+            <GroupBox Header="Nhóm" Margin="10">
+
+                <StackPanel>
+                    <ComboBox>
+
+                    </ComboBox>
+                    <TextBlock Text="Email"/>
+                    <TextBox/>
+                </StackPanel>
+                
+                
+            </GroupBox>
+
+            <Calendar>
+                
+            </Calendar>
+
+            <DatePicker Margin="5">
+                
+            </DatePicker>
+
+        </StackPanel>
 
         <Grid Grid.Column="1">
-            <Border Opacity="0.5">
+
+            <TabControl>
+                <TabItem Header="ListBox">
+                    <ListBox>
+                        <ListBoxItem Content="Listbox 1">
+                            
+                        </ListBoxItem>
+
+                        <ListBoxItem Content="Listbox 2">
+
+                        </ListBoxItem>
+
+                        <ListBoxItem Content="Listbox 3">
+
+                        </ListBoxItem>
+                    </ListBox>
+                </TabItem>
+
+                <TabItem Header="ComboBox">
+                    <StackPanel>
+                        <ComboBox>
+                            <ComboBoxItem Content="Giá trị 1"/>
+                            <ComboBoxItem Content="Giá trị 2"/>
+                            <ComboBoxItem Content="Giá trị 3"/>
+                        </ComboBox>
+                    </StackPanel>
+                </TabItem>
+
+                <TabItem Header="ListView">
+                    <StackPanel>
+                        <ListView>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Tên"/>
+                                    <GridViewColumn Header="Tuổi"/>
+                                    <GridViewColumn Header="Email"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                </TabItem>
+
+                <TabItem Header="DataGrid">
+                    <StackPanel>
+                        <DataGrid>
+                            <DataGrid.Columns>
+                                <DataGridCheckBoxColumn Header="Checkbox"/>
+                                <DataGridTextColumn Header="Text"/>
+                                <DataGridComboBoxColumn Header="ComboBox"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+            
+            
+            <Grid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Ví dụ ContextMenu"/>
+                    <MenuItem Header="Open"/>
+                    <MenuItem Header="Save"/>
+                    <Separator/>
+                    <MenuItem Header="Exit"/>
+                </ContextMenu>
+            </Grid.ContextMenu>
+            
+            <!--<Border Opacity="0.5">
                 <Border.Background>
                     <ImageBrush ImageSource="/Photo/6027811.jpg" Stretch="UniformToFill"/>
                 </Border.Background>
-            </Border>
+            </Border>-->
             
         </Grid>
+
+        
+    
+        <!--<Image Source="/Photo/photo.jpg"
+               Margin="10"
+               Width="100" Height="100"></Image>-->
     </Grid>
 </Window>
