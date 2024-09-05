@@ -1,36 +1,43 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--<Style TargetType="Button">
+        <Setter Property="Background" Value="Black" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>-->
+
+
     <Color x:Key="Color_00">#F26522</Color>
-<Color x:Key="Color_01">#006536</Color>
+    <Color x:Key="Color_01">#006536</Color>
 
-<SolidColorBrush x:Key="MaterialDesign.Brush.Primary.Light" Color="{DynamicResource Color_00}" />
+    <SolidColorBrush x:Key="SColor_00" Color="{DynamicResource Color_00}" />
 
-<SolidColorBrush x:Key="MaterialDesign.Brush.Primary.Light.Foreground" Color="{DynamicResource Color_00}" />
+    <SolidColorBrush x:Key="SColor_01" Color="{DynamicResource Color_01}" />
 
-<SolidColorBrush x:Key="MaterialDesign.Brush.Primary" Color="{DynamicResource Color_00}" />
+    <SolidColorBrush x:Key="MaterialDesign.Brush.Primary.Light" Color="{DynamicResource Color_00}" />
 
-<SolidColorBrush x:Key="MaterialDesign.Brush.Primary.Foreground" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="MaterialDesign.Brush.Primary.Light.Foreground" Color="{DynamicResource Color_00}" />
 
-<SolidColorBrush x:Key="MaterialDesign.Brush.Primary.Dark" Color="{DynamicResource Color_00}" />
+    <SolidColorBrush x:Key="MaterialDesign.Brush.Primary" Color="{DynamicResource Color_00}" />
 
-<SolidColorBrush x:Key="MaterialDesign.Brush.Primary.Dark.Foreground" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="MaterialDesign.Brush.Primary.Foreground" Color="#FFFFFF" />
 
-<SolidColorBrush x:Key="MaterialDesign.Brush.Secondary.Light" Color="{DynamicResource Color_01}" />
+    <SolidColorBrush x:Key="MaterialDesign.Brush.Primary.Dark" Color="{DynamicResource Color_00}" />
 
-<SolidColorBrush x:Key="MaterialDesign.Brush.Secondary.Light.Foreground" Color="{DynamicResource Color_01}" />
+    <SolidColorBrush x:Key="MaterialDesign.Brush.Primary.Dark.Foreground" Color="#FFFFFF" />
 
-<SolidColorBrush x:Key="MaterialDesign.Brush.Secondary" Color="{DynamicResource Color_01}" />
+    <SolidColorBrush x:Key="MaterialDesign.Brush.Secondary.Light" Color="{DynamicResource Color_01}" />
 
-<SolidColorBrush x:Key="MaterialDesign.Brush.Secondary.Foreground" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="MaterialDesign.Brush.Secondary.Light.Foreground" Color="{DynamicResource Color_01}" />
 
-<SolidColorBrush x:Key="MaterialDesign.Brush.Secondary.Dark" Color="{DynamicResource Color_01}" />
+    <SolidColorBrush x:Key="MaterialDesign.Brush.Secondary" Color="{DynamicResource Color_01}" />
 
-<SolidColorBrush x:Key="MaterialDesign.Brush.Secondary.Dark.Foreground" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="MaterialDesign.Brush.Secondary.Foreground" Color="#FFFFFF" />
 
-<SolidColorBrush x:Key="SColor_00" Color="{DynamicResource Color_00}" />
+    <SolidColorBrush x:Key="MaterialDesign.Brush.Secondary.Dark" Color="{DynamicResource Color_01}" />
 
-<SolidColorBrush x:Key="SColor_01" Color="{DynamicResource Color_01}" />
+    <SolidColorBrush x:Key="MaterialDesign.Brush.Secondary.Dark.Foreground" Color="#FFFFFF" />
+
+
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />

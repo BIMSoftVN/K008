@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\vmSignIn.cs" />
     <Compile Include="Views\vMain.xaml.cs">
       <DependentUpon>vMain.xaml</DependentUpon>
     </Compile>
