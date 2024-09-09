@@ -8,6 +8,7 @@ namespace GiaoViec.ViewModel
 {
     public class vmSignIn
     {
-        public string Email { get; set; } = "anhdt@xuanmaicorp.vn";
+        protected static string Email { get; set; } = "anhdt@xuanmaicorp.vn";
+
     }
 }

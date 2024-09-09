@@ -67,7 +67,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\clTask.cs" />
+    <Compile Include="Libs\ObservableRangeCollection.cs" />
+    <Compile Include="Libs\PropertyChangedBase.cs" />
+    <Compile Include="ViewModel\vmGiaoViec.cs" />
     <Compile Include="ViewModel\vmSignIn.cs" />
+    <Compile Include="ViewModel\vmTaoGiaoViec.cs" />
+    <Compile Include="Views\vGiaoViec.xaml.cs">
+      <DependentUpon>vGiaoViec.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\vMain.xaml.cs">
       <DependentUpon>vMain.xaml</DependentUpon>
     </Compile>
@@ -78,7 +86,14 @@
     <Compile Include="Views\vSignIn.xaml.cs">
       <DependentUpon>vSignIn.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\vTaoGiaoViec.xaml.cs">
+      <DependentUpon>vTaoGiaoViec.xaml</DependentUpon>
+    </Compile>
     <Page Include="RDK008.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\vGiaoViec.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -87,6 +102,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\vSignIn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\vTaoGiaoViec.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,6 +154,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Photo\bg2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Photo\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Photo\Add.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.5.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.5.1.0\build\MaterialDesignThemes.targets')" />
