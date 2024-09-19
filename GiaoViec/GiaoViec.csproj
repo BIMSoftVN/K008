@@ -304,6 +304,9 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Controls.Ribbon" />
@@ -328,15 +331,23 @@
     <Compile Include="Classes\clTask.cs" />
     <Compile Include="Libs\ObservableRangeCollection.cs" />
     <Compile Include="Libs\PropertyChangedBase.cs" />
+    <Compile Include="ViewModel\Pages\vmAddTask.cs" />
+    <Compile Include="ViewModel\Pages\vmGiaoViec.cs" />
     <Compile Include="ViewModel\vmGiaoViec.cs" />
     <Compile Include="ViewModel\vmGiaoViec2.cs" />
     <Compile Include="ViewModel\vmSignIn.cs" />
     <Compile Include="ViewModel\vmTaoGiaoViec.cs" />
+    <Compile Include="Views\Pages\pAddTask.xaml.cs">
+      <DependentUpon>pAddTask.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\pGiaoViec.xaml.cs">
       <DependentUpon>pGiaoViec.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\pNguoiDung.xaml.cs">
       <DependentUpon>pNguoiDung.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\pThongTinTaiKhoan.xaml.cs">
+      <DependentUpon>pThongTinTaiKhoan.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\vGiaoViec.xaml.cs">
       <DependentUpon>vGiaoViec.xaml</DependentUpon>
@@ -357,7 +368,15 @@
     <Compile Include="Views\vTaoGiaoViec.xaml.cs">
       <DependentUpon>vTaoGiaoViec.xaml</DependentUpon>
     </Compile>
+    <Page Include="MD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RDK008.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\pAddTask.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -366,6 +385,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\pNguoiDung.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\pThongTinTaiKhoan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

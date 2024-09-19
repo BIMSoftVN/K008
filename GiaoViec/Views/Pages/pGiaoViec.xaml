@@ -1,18 +1,31 @@
-﻿<Page xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"  xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+﻿<Page
     x:Class="GiaoViec.Views.Pages.pGiaoViec"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
     xmlns:local="clr-namespace:GiaoViec.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:GiaoViec.ViewModel.Pages" xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     Title="Giao việc"
     d:DesignHeight="450"
     d:DesignWidth="800"
     dx:ThemeManager.ThemeName="Win11Light"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:vmGiaoViec />
+    </Page.DataContext>
+
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding Cmd_LoadData}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -30,18 +43,31 @@
                     <dxr:RibbonPageGroup>
                         <dxb:BarButtonItem
                             Content="Tải dữ liệu"
+                            Command="{Binding Cmd_LoadData}"
                             Glyph="{dx:DXImage 'SvgImages/XAF/Action_Refresh.svg'}"
                             LargeGlyph="{dx:DXImage 'SvgImages/XAF/Action_Refresh.svg'}" />
 
                         <dxb:BarButtonItem
-                            Content="Tải dữ liệu"
-                            Glyph="{dx:DXImage 'SvgImages/XAF/Action_Refresh.svg'}"
-                            LargeGlyph="{dx:DXImage 'SvgImages/XAF/Action_Refresh.svg'}" />
+                            Command="{Binding Cmd_OpenFrame}"
+                            CommandParameter="AddTask"
+                            Content="Thêm công việc"
+                            Glyph="{dx:DXImage 'SvgImages/Icon Builder/Actions_AddCircled.svg'}"
+                            LargeGlyph="{dx:DXImage 'SvgImages/Icon Builder/Actions_AddCircled.svg'}" />
 
                         <dxb:BarButtonItem
-                            Content="Tải dữ liệu"
-                            Glyph="{dx:DXImage 'SvgImages/XAF/Action_Refresh.svg'}"
-                            LargeGlyph="{dx:DXImage 'SvgImages/XAF/Action_Refresh.svg'}" />
+                            Content="Xóa công việc"
+                            Glyph="{dx:DXImage 'SvgImages/Icon Builder/Actions_DeleteCircled.svg'}"
+                            LargeGlyph="{dx:DXImage 'SvgImages/Icon Builder/Actions_DeleteCircled.svg'}" />
+                    </dxr:RibbonPageGroup>
+
+                    <dxr:RibbonPageGroup>
+                        <dxb:BarButtonItem
+                            Content="Lưu lên phần mềm"
+                            Command="{Binding Cmd_Save}"
+                            Glyph="{dx:DXImage 'SvgImages/XAF/Action_SaveScript.svg'}"
+                            LargeGlyph="{dx:DXImage 'SvgImages/XAF/Action_SaveScript.svg'}" />
+
+                        
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
@@ -49,36 +75,44 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <GridSplitter Width="5" HorizontalAlignment="Stretch"
-                          Grid.Column="1"/>
-            
-            <dxg:GridControl 
-                ItemsSource="{Binding TaskList}"/>
+            <GridSplitter
+                Grid.Column="1"
+                Width="5"
+                HorizontalAlignment="Stretch" />
+
+            <dxg:GridControl ItemsSource="{Binding TaskList}">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn FieldName="Ten" IsSmart="True" />
+
+                    <dxg:GridColumn FieldName="MoTa" IsSmart="True" />
+                </dxg:GridControl.Columns>
+            </dxg:GridControl>
 
             <StackPanel Grid.Column="2">
                 <dxc:ChartControl>
                     <dxc:ChartControl.CrosshairOptions>
-                        <dxc:CrosshairOptions ShowArgumentLabels="True" 
-                                      ShowValueLabels="True" 
-                                      ShowValueLine="True"/>
+                        <dxc:CrosshairOptions
+                            ShowArgumentLabels="True"
+                            ShowValueLabels="True"
+                            ShowValueLine="True" />
                     </dxc:ChartControl.CrosshairOptions>
                     <dxc:ChartControl.Titles>
-                        <dxc:Title Content="Sales by Regions" 
-                           HorizontalAlignment="Center"/>
+                        <dxc:Title HorizontalAlignment="Center" Content="Sales by Regions" />
                     </dxc:ChartControl.Titles>
                     <dxc:ChartControl.Legends>
-                        <dxc:Legend/>
+                        <dxc:Legend />
                     </dxc:ChartControl.Legends>
                     <dxc:XYDiagram2D>
-                        <dxc:BarSideBySideSeries2D DisplayName="Annual Statistics" 
-                                           ArgumentDataMember="Argument" 
-                                           ValueDataMember="Value" 
-                                           CrosshairLabelPattern="${V:f2}M"/>
+                        <dxc:BarSideBySideSeries2D
+                            ArgumentDataMember="Argument"
+                            CrosshairLabelPattern="${V:f2}M"
+                            DisplayName="Annual Statistics"
+                            ValueDataMember="Value" />
                     </dxc:XYDiagram2D>
                 </dxc:ChartControl>
             </StackPanel>

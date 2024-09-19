@@ -1,4 +1,5 @@
 ﻿using GiaoViec.Libs;
+using GiaoViec.Views;
 using GiaoViec.Views.Pages;
 using Microsoft.Xaml.Behaviors.Core;
 using System;
@@ -27,23 +28,51 @@ namespace GiaoViec.ViewModel
             }
         }
 
-
-        private ActionCommand cmd_OpenMainPage;
-
-        public ICommand Cmd_OpenMainPage
+        private Page _PopUpFrameContent;
+        public Page PopUpFrameContent
         {
             get
             {
-                if (cmd_OpenMainPage == null)
-                {
-                    cmd_OpenMainPage = new ActionCommand(PerformCmd_OpenMainPage);
-                }
-
-                return cmd_OpenMainPage;
+                return _PopUpFrameContent;
+            }
+            set
+            {
+                _PopUpFrameContent = value;
+                OnPropertyChanged();
             }
         }
 
-        private void PerformCmd_OpenMainPage(object parameter)
+        private bool _IsPopUp = false;
+        public bool IsPopUp
+        {
+            get
+            {
+                return _IsPopUp;
+            }
+            set
+            {
+                _IsPopUp = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private ActionCommand _Cmd_OpenPage;
+
+        public ICommand Cmd_OpenPage
+        {
+            get
+            {
+                if (_Cmd_OpenPage == null)
+                {
+                    _Cmd_OpenPage = new ActionCommand(PerformCmd_OpenPage);
+                }
+
+                return _Cmd_OpenPage;
+            }
+        }
+
+        private void PerformCmd_OpenPage(object parameter)
         {
             string ActionName = parameter as string;
             try
@@ -57,12 +86,38 @@ namespace GiaoViec.ViewModel
                     case "pNguoiDung":
                         MainFrameContent = new pNguoiDung();
                         break;
+
+                    case "pThongTinTaiKhoan":
+                        PopUpFrameContent = new pThongTinTaiKhoan();
+                        IsPopUp = true;
+                        break;
                 }
             }
             catch
             {
 
             }
+        }
+
+        private ActionCommand cmd_ClosePopUp;
+
+        public ICommand Cmd_ClosePopUp
+        {
+            get
+            {
+                if (cmd_ClosePopUp == null)
+                {
+                    cmd_ClosePopUp = new ActionCommand(PerformCmd_ClosePopUp);
+                }
+
+                return cmd_ClosePopUp;
+            }
+        }
+
+        private void PerformCmd_ClosePopUp()
+        {
+            PopUpFrameContent = null;
+            IsPopUp = false;
         }
     }
 }
