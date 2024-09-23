@@ -1,0 +1,121 @@
+﻿<Page
+    x:Class="iTask.Views.Pages.pAccInfo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:local="clr-namespace:iTask.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p="clr-namespace:iTask.Properties"
+    Title="Thông tin tài khoản"
+    dx:ThemeManager.ThemeName="Win11Light"
+    xmlns:vm="clr-namespace:iTask.ViewModels.Pages" xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:vmAccInfo />
+    </Page.DataContext>
+
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding Cmd_LoadAll}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+
+    <Grid>
+        <StackPanel Width="350" Height="Auto">
+            <Border
+                Width="80"
+                Height="80"
+                BorderBrush="Black"
+                BorderThickness="1"
+                CornerRadius="40" />
+
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{x:Static p:Resources.TenNguoiDung}" />
+
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{Binding User.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="Email" />
+
+                <TextBox
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="14" 
+                    Text="{Binding User.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{x:Static p:Resources.NgaySinh}" />
+
+                <TextBox
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="14" 
+                    Text="{Binding User.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{x:Static p:Resources.DiaChi}" />
+
+                <TextBox
+                    Grid.Row="6"
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="14" 
+                    Text="{Binding User.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+
+            <Button
+                Width="100"
+                Margin="20"
+                Content="Cập nhật" 
+                Command="{Binding Cmd_UpdateData}"/>
+        </StackPanel>
+    </Grid>
+</Page>

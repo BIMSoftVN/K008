@@ -1,22 +1,23 @@
-﻿using GiaoViec.Libs;
-using GiaoViec.Views;
-using GiaoViec.Views.Pages;
+﻿using DevExpress.Mvvm;
+using iTask.Views.Pages;
+using K008Libs.Mvvm;
 using Microsoft.Xaml.Behaviors.Core;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
 
-namespace GiaoViec.ViewModel
+namespace iTask.ViewModels
 {
-    public class vmGiaoViec2 : PropertyChangedBase
+    public class vmMain : PropertyChangedBase
     {
+
+
         private Page _MainFrameContent;
         public Page MainFrameContent
         {
@@ -77,34 +78,29 @@ namespace GiaoViec.ViewModel
 
         private async void PerformCmd_OpenPage(object parameter)
         {
-            IsPopUp = true;
             string ActionName = parameter as string;
             try
             {
-                switch (ActionName) 
+                switch (ActionName)
                 {
                     case "pGiaoViec":
-                        (App.Current.MainWindow as vGiaoViec2).MainFrame.Navigate(App._preloadedWindow);
+                        //(App.Current.MainWindow as vGiaoViec2).MainFrame.Navigate(App._preloadedWindow);
                         //MainFrameContent = App._preloadedWindow;
                         break;
 
                     case "pNguoiDung":
-                        MainFrameContent = new pNguoiDung();
+                        //MainFrameContent = new pNguoiDung();
                         break;
 
                     case "pThongTinTaiKhoan":
-                        PopUpFrameContent = new pThongTinTaiKhoan();
-                        IsPopUp = true;
+                        this.PopUpFrameContent = new pAccInfo();
+                        this.IsPopUp = true;
                         break;
                 }
             }
             catch
             {
 
-            }
-            finally
-            {
-                IsPopUp = false;
             }
         }
 
@@ -127,6 +123,32 @@ namespace GiaoViec.ViewModel
         {
             PopUpFrameContent = null;
             IsPopUp = false;
+        }
+
+
+
+        private ActionCommand cmd_SetLang;
+
+        public ICommand Cmd_SetLang
+        {
+            get
+            {
+                if (cmd_SetLang == null)
+                {
+                    cmd_SetLang = new ActionCommand(PerformCmd_SetLang);
+                }
+
+                return cmd_SetLang;
+            }
+        }
+
+        private void PerformCmd_SetLang(object parameter)
+        {
+            Properties.Settings.Default.LangName = (parameter as string);
+            Properties.Settings.Default.Save();
+
+            Process.Start(Assembly.GetExecutingAssembly().Location);
+            Environment.Exit(0);
         }
     }
 }

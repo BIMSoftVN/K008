@@ -1,14 +1,15 @@
 ﻿<Window
-    x:Class="GiaoViec.Views.vGiaoViec2"
+    x:Class="iTask.Views.vMain"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
-    xmlns:local="clr-namespace:GiaoViec.Views"
+    xmlns:local="clr-namespace:iTask.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:vm="clr-namespace:GiaoViec.ViewModel"
+    xmlns:p="clr-namespace:iTask.Properties"
+    xmlns:vm="clr-namespace:iTask.ViewModels"
     Title="vGiaoViec2"
     d:Height="1080"
     d:Width="1920"
@@ -16,7 +17,7 @@
     mc:Ignorable="d">
 
     <Window.DataContext>
-        <vm:vmGiaoViec2 />
+        <vm:vmMain />
     </Window.DataContext>
 
     <Grid>
@@ -33,7 +34,7 @@
                     AllowGlyphTheming="True"
                     Command="{Binding Cmd_OpenPage}"
                     CommandParameter="pGiaoViec"
-                    Content="Giao việc"
+                    Content="{x:Static p:Resources.CongViec}"
                     FontSize="15"
                     Glyph="{dx:DXImage 'SvgImages/Business Objects/BO_Task.svg'}"
                     GlyphColor="White"
@@ -75,6 +76,23 @@
                                         Height="16"
                                         Source="{dx:DXImage 'SvgImages/Icon Builder/Actions_User.svg'}" />
                                 </MenuItem.Icon>
+                            </MenuItem>
+
+                            <MenuItem Header="{x:Static p:Resources.NgonNgu}">
+
+                                <MenuItem
+                                    Command="{Binding Cmd_SetLang}"
+                                    CommandParameter="en"
+                                    Header="English" />
+                                <MenuItem
+                                    Command="{Binding Cmd_SetLang}"
+                                    CommandParameter="vi-VN"
+                                    Header="Tiếng Việt" />
+
+                                <MenuItem
+                                    Command="{Binding Cmd_SetLang}"
+                                    CommandParameter="zh"
+                                    Header="中文" />
                             </MenuItem>
                             <Separator />
                             <MenuItem Foreground="Red" Header="Đăng xuất" />
