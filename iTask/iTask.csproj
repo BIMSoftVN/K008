@@ -375,14 +375,24 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\clUser.cs" />
+    <Compile Include="Models\mSQLServer.cs" />
     <Compile Include="Models\mUser.cs" />
+    <Compile Include="Properties\Lang.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Pages\vmAccInfo.cs" />
+    <Compile Include="ViewModels\Pages\vmNguoiDung.cs" />
     <Compile Include="ViewModels\vmMain.cs" />
+    <Compile Include="Views\Pages\pNguoiDung.xaml.cs">
+      <DependentUpon>pNguoiDung.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\pTest.xaml.cs">
       <DependentUpon>pTest.xaml</DependentUpon>
     </Compile>
@@ -399,6 +409,10 @@
     <Page Include="RDK008.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\pNguoiDung.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\pTest.xaml">
       <SubType>Designer</SubType>
@@ -422,6 +436,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Lang.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.en.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -439,7 +457,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Photo\NoAvatar.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\DevExpress.Reporting.Core.22.2.3\build\DevExpress.Reporting.Core.targets" Condition="Exists('..\packages\DevExpress.Reporting.Core.22.2.3\build\DevExpress.Reporting.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

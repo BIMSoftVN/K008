@@ -79,5 +79,19 @@ namespace iTask.Classes
             }
         }
 
+        private byte[] _Photo;
+        public byte[] Photo
+        {
+            get
+            {
+                return _Photo;
+            }
+            set
+            {
+                _Photo = value;
+                OnPropertyChanged();
+            }
+        }
+
     }
 }

@@ -89,7 +89,7 @@ namespace iTask.ViewModels
                         break;
 
                     case "pNguoiDung":
-                        //MainFrameContent = new pNguoiDung();
+                        MainFrameContent = new pNguoiDung();
                         break;
 
                     case "pThongTinTaiKhoan":

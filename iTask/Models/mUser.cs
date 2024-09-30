@@ -120,8 +120,9 @@ namespace iTask.Models
                     cmd.Parameters.AddWithValue("UserName", user.UserName);
                     cmd.Parameters.AddWithValue("DateOfBirth", user.DateOfBirth);
                     cmd.Parameters.AddWithValue("Address", user.Address);
+                    cmd.Parameters.AddWithValue("Photo", user.Photo);
 
-                    cmd.CommandText = "UPDATE [UserInfo] SET [Email]=@Email, [UserName]=@UserName, [DateOfBirth]=@DateOfBirth , [Address]=@Address WHERE [Id]=@Id";
+                    cmd.CommandText = "UPDATE [UserInfo] SET [Email]=@Email,[Photo]=@Photo, [UserName]=@UserName, [DateOfBirth]=@DateOfBirth , [Address]=@Address WHERE [Id]=@Id";
                     var kq = await cmd.ExecuteNonQueryAsync();
                     if (kq>0)
                     {

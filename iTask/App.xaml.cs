@@ -14,6 +14,8 @@ namespace iTask
 
         public static string UserId = "e4e0ddbb-edf4-4f20-810a-05bd2cff92a0";
 
+        public static string ConnectionString { get; set; } = "Server=./;Database=iTask;TrustServerCertificate=True;MultipleActiveResultSets=True;";
+
         protected override void OnStartup(StartupEventArgs e)
         {
             ApplicationThemeHelper.ApplicationThemeName = Theme.Win11LightName;
