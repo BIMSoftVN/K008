@@ -1,28 +1,24 @@
 ﻿<Page
-    x:Class="iTask.Views.Pages.pAccInfo"
+    x:Class="iTask.Views.Pages.pUserInfo"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-    xmlns:local="clr-namespace:iTask.Views.Pages"
+    xmlns:local="clr-namespace:iTask.ViewModels.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:p="clr-namespace:iTask.Properties"
     xmlns:vm="clr-namespace:iTask.ViewModels.Pages"
-    Title="Thông tin tài khoản"
+    Title="Thêm người dùng"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
     dx:ThemeManager.ThemeName="Win11Light"
     mc:Ignorable="d">
 
     <Page.DataContext>
-        <vm:vmAccInfo />
+        <vm:vmUserInfo />
     </Page.DataContext>
-
-    <b:Interaction.Triggers>
-        <b:EventTrigger EventName="Loaded">
-            <b:InvokeCommandAction Command="{Binding Cmd_LoadAll}" />
-        </b:EventTrigger>
-    </b:Interaction.Triggers>
 
     <Grid>
         <StackPanel Width="350" Height="Auto">
@@ -125,20 +121,20 @@
                     Text="{Binding User.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <!--<DatePicker
-                    Grid.Row="4"
-                    Grid.Column="2"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    SelectedDate="{Binding User.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
+            Grid.Row="4"
+            Grid.Column="2"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            FontSize="14"
+            SelectedDate="{Binding User.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
 
                 <!--<TextBox
-                    Grid.Row="4"
-                    Grid.Column="2"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Text="{Binding User.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
+            Grid.Row="4"
+            Grid.Column="2"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            FontSize="14"
+            Text="{Binding User.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
 
                 <TextBlock
                     Grid.Row="6"

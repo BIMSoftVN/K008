@@ -1,12 +1,14 @@
 ﻿using K008Libs.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace iTask.Classes
 {
+    [Table("Users")]
     public class clUser : PropertyChangedBase
     {
         private string _Id;

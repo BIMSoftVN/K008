@@ -1,4 +1,6 @@
 ﻿using DevExpress.Xpf.Core;
+using iTask.EF;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
@@ -16,6 +18,9 @@ namespace iTask
 
         public static string ConnectionString { get; set; } = "Server=./;Database=iTask;TrustServerCertificate=True;MultipleActiveResultSets=True;";
 
+        public static DbContextOptionsBuilder<iTaskDbContext> op = new DbContextOptionsBuilder<iTaskDbContext>();
+        public static iTaskDbContext dbContext;
+
         protected override void OnStartup(StartupEventArgs e)
         {
             ApplicationThemeHelper.ApplicationThemeName = Theme.Win11LightName;
@@ -26,6 +31,9 @@ namespace iTask
 
             CultureInfo.DefaultThreadCurrentCulture = cul;
             CultureInfo.DefaultThreadCurrentUICulture = cul;
+
+            op.UseSqlServer(App.ConnectionString);
+            dbContext = new iTaskDbContext(op.Options);
         }
     }
 }

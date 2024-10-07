@@ -5,6 +5,7 @@
         <Setter Property="Foreground" Value="White" />
     </Style>-->
 
+    <ImageBrush x:Key="NoPhoto" ImageSource="/Photo/NoAvatar.jpg" />
 
     <Color x:Key="Color_00">#F26522</Color>
     <Color x:Key="Color_01">#006536</Color>
