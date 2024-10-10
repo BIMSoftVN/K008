@@ -115,5 +115,35 @@ namespace iTask.Models
 
             return res;
         }
+
+        public static async Task<bool> ImportUsers(List<clUser> UserList)
+        {
+            var res = false;
+
+            try
+            {
+                if (App.dbContext.Database.CanConnect())
+                {
+                    foreach (var user in UserList)
+                    {
+                        user.Id = Guid.NewGuid().ToString();
+                    }    
+
+                    App.dbContext.Users.AddRange(UserList);
+                    var kq = await App.dbContext.SaveChangesAsync();
+                    if (kq > 0)
+                    {
+                        res = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return res;
+        }
+
     }
 }

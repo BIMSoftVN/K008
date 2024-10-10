@@ -11,6 +11,7 @@
     xmlns:local="clr-namespace:iTask.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:iTask.ViewModels.Pages"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     Title="pNguoiDung"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -58,10 +59,22 @@
                                 LargeGlyph="{dx:DXImage 'SvgImages/Icon Builder/Actions_Add.svg'}" />
 
                             <dxb:BarButtonItem
+                                Command="{Binding Cmd_Popup}"
+                                CommandParameter="pImportExcel"
+                                Content="Nhập Excel">
+
+                                <dxb:BarButtonItem.GlyphTemplate>
+                                    <DataTemplate>
+                                        <md:PackIcon Foreground="Green"
+                                                     Kind="FileExcel"/>
+                                    </DataTemplate>
+                                </dxb:BarButtonItem.GlyphTemplate>
+                            </dxb:BarButtonItem>
+
+                            <dxb:BarButtonItem
                                 Command="{Binding Cmd_Delete}"
                                 Content="Xóa người dùng"
-                                Glyph="{dx:DXImage 'SvgImages/Icon Builder/Actions_Delete.svg'}"
-                                LargeGlyph="{dx:DXImage 'SvgImages/Icon Builder/Actions_Delete.svg'}" />
+                                Glyph="{dx:DXImage 'SvgImages/Icon Builder/Actions_Delete.svg'}" />
                         </dxr:RibbonPageGroup>
                     </dxr:RibbonPage>
                 </dxr:RibbonDefaultPageCategory>

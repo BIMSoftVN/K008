@@ -134,6 +134,14 @@ namespace iTask.ViewModels.Pages
                         (vmM.PopUpFrameContent.DataContext as vmUserInfo).User = UserItem.ShallowCopy();
                         vmM.IsPopUp = true;
                         break;
+
+                    case "pImportExcel":
+
+                        vmM.PopUpFrameContent = new pImportExcel();
+
+                        //(vmM.PopUpFrameContent.DataContext as vmUserInfo).User = UserItem.ShallowCopy();
+                        vmM.IsPopUp = true;
+                        break;  
                 }
             }
             catch
