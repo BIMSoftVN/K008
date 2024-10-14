@@ -78,7 +78,7 @@ namespace iTask.ViewModels.Pages
                 return cmd_LoadAll;
             }
         }
-
+         
         private async void PerformCmd_LoadAll()
         {
             try

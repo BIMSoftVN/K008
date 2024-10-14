@@ -84,8 +84,7 @@ namespace iTask.ViewModels
                 switch (ActionName)
                 {
                     case "pGiaoViec":
-                        //(App.Current.MainWindow as vGiaoViec2).MainFrame.Navigate(App._preloadedWindow);
-                        //MainFrameContent = App._preloadedWindow;
+                        MainFrameContent = new pGiaoViec();
                         break;
 
                     case "pNguoiDung":

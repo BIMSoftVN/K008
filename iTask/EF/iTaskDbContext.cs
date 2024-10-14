@@ -11,6 +11,7 @@ namespace iTask.EF
     public class iTaskDbContext : DbContext
     {
         public DbSet<clUser> Users { get; set; }
+        public DbSet<clTask> Tasks { get; set; }
 
         public iTaskDbContext(DbContextOptions<iTaskDbContext> op):base(op)
         {}
@@ -25,6 +26,10 @@ namespace iTask.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<clTask>().HasOne(o => o.NguoiGiao).WithMany().HasForeignKey(o => o.NguoiGiaoId);
+            modelBuilder.Entity<clTask>().HasOne(o => o.NguoiNhan).WithMany().HasForeignKey(o => o.NguoiNhanId);
+
             base.OnModelCreating(modelBuilder);
         }
     }

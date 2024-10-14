@@ -145,5 +145,24 @@ namespace iTask.Models
             return res;
         }
 
+        public static async Task<List<clTask>> GetAllTasks()
+        {
+            List<clTask> uList = null;
+
+            try
+            {
+                if (App.dbContext.Database.CanConnect())
+                {
+                    uList = await App.dbContext.Tasks.Include(o=>o.NguoiGiao).Include(o => o.NguoiNhan).AsNoTracking().ToListAsync();
+                }
+            }
+            catch
+            {
+
+            }
+
+            return uList;
+        }
+
     }
 }

@@ -469,6 +469,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\clTask.cs" />
     <Compile Include="Classes\clUser.cs" />
     <Compile Include="EF\iTaskDbContext.cs" />
     <Compile Include="Models\mEF.cs" />
@@ -485,15 +486,23 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Pages\vmAccInfo.cs" />
+    <Compile Include="ViewModels\Pages\vmGiaoViec.cs" />
     <Compile Include="ViewModels\Pages\vmImportExcel.cs" />
     <Compile Include="ViewModels\Pages\vmNguoiDung.cs" />
+    <Compile Include="ViewModels\Pages\vmTaskInfo.cs" />
     <Compile Include="ViewModels\Pages\vmUserInfo.cs" />
     <Compile Include="ViewModels\vmMain.cs" />
+    <Compile Include="Views\Pages\pGiaoViec.xaml.cs">
+      <DependentUpon>pGiaoViec.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\pImportExcel.xaml.cs">
       <DependentUpon>pImportExcel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\pNguoiDung.xaml.cs">
       <DependentUpon>pNguoiDung.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\pTaskInfo.xaml.cs">
+      <DependentUpon>pTaskInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\pTest.xaml.cs">
       <DependentUpon>pTest.xaml</DependentUpon>
@@ -515,11 +524,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Pages\pGiaoViec.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\pImportExcel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\pNguoiDung.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\pTaskInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

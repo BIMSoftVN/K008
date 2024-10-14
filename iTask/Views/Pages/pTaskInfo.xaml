@@ -1,0 +1,306 @@
+﻿<Page
+    x:Class="iTask.Views.Pages.pTaskInfo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:local="clr-namespace:iTask.ViewModels.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p="clr-namespace:iTask.Properties"
+    xmlns:vm="clr-namespace:iTask.ViewModels.Pages"
+    Title="Thêm công việc"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    dx:ThemeManager.ThemeName="Win11Light"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:vmTaskInfo />
+    </Page.DataContext>
+
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding Cmd_LoadAll}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+
+    <Grid>
+        <StackPanel Width="350" Height="Auto">
+            <!--<Border
+                Width="80"
+                Height="80"
+                BorderThickness="2"
+                CornerRadius="40">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="BorderBrush" Value="White" />
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <ImageBrush ImageSource="{Binding User.Photo, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="{StaticResource SColor_00}" />
+                            </Trigger>
+
+                            <DataTrigger Binding="{Binding User.Photo, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource NoPhoto}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <b:InvokeCommandAction Command="{Binding Cmd_ChangePhoto}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </Border>-->
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <TextBlock
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="Tên" />
+
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Width="250"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{Binding Task.Ten, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <TextBlock
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="Mô tả" />
+
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Width="250"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{Binding Task.MoTa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <TextBlock
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="Trạng thái" />
+
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Width="250"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{Binding Task.TrangThai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <TextBlock
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="Ngày Tạo" />
+
+                <dxe:DateEdit
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Width="250"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    MaskType="DateOnly"
+                    MaskUseAsDisplayFormat="True"
+                    Text="{Binding Task.NgayTao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <TextBlock
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="Deadline" />
+
+                <dxe:DateEdit
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Width="250"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    MaskType="DateOnly"
+                    MaskUseAsDisplayFormat="True"
+                    Text="{Binding Task.Deadline, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <TextBlock
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="Người giao" />
+
+                <dxe:ComboBoxEdit
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Width="250"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    DisplayMember="UserName"
+                    FontSize="14"
+                    ItemsSource="{Binding UserList}"
+                    SelectedItem="{Binding Task.NguoiGiao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <TextBlock
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="Người Nhận" />
+
+                <dxe:ComboBoxEdit
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Width="250"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    DisplayMember="UserName"
+                    FontSize="14"
+                    ItemsSource="{Binding UserList}"
+                    SelectedItem="{Binding Task.NguoiNhan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+
+            <!--<Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{x:Static p:Resources.TenNguoiDung}" />
+
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{Binding User.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="Email" />
+
+                <TextBox
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{Binding User.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{x:Static p:Resources.NgaySinh}" />
+
+                <dxe:DateEdit
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    MaskType="DateOnly"
+                    MaskUseAsDisplayFormat="True"
+                    Text="{Binding User.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            -->
+            <!--<DatePicker
+            Grid.Row="4"
+            Grid.Column="2"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            FontSize="14"
+            SelectedDate="{Binding User.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
+
+            <!--<TextBox
+            Grid.Row="4"
+            Grid.Column="2"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            FontSize="14"
+            Text="{Binding User.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
+            <!--
+
+                <TextBlock
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{x:Static p:Resources.DiaChi}" />
+
+                <TextBox
+                    Grid.Row="6"
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{Binding User.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>-->
+
+            <Button
+                Width="100"
+                Margin="20"
+                Command="{Binding Cmd_UpdateData}"
+                Content="Cập nhật" />
+        </StackPanel>
+    </Grid>
+</Page>

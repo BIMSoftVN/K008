@@ -1,0 +1,154 @@
+﻿<Page
+    x:Class="iTask.Views.Pages.pGiaoViec"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:local="clr-namespace:iTask.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:iTask.ViewModels.Pages"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    Title="pNguoiDung"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    dx:ThemeManager.ThemeName="Win11Light"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:vmGiaoViec />
+    </Page.DataContext>
+
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding Cmd_LoadAll}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+
+    <dx:LoadingDecorator>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <dxr:RibbonControl
+                RibbonHeaderVisibility="Collapsed"
+                ShowApplicationButton="False"
+                ToolbarShowMode="Hide">
+
+                <dxr:RibbonDefaultPageCategory>
+                    <dxr:RibbonPage>
+                        <dxr:RibbonPageGroup Caption="Chung">
+                            <dxb:BarButtonItem
+                                Command="{Binding Cmd_LoadAll}"
+                                Content="Tải dữ liệu"
+                                Glyph="{dx:DXImage 'SvgImages/Spreadsheet/RefreshAllPivotTable.svg'}"
+                                LargeGlyph="{dx:DXImage 'SvgImages/Spreadsheet/RefreshAllPivotTable.svg'}" />
+                        </dxr:RibbonPageGroup>
+
+                        <dxr:RibbonPageGroup Caption="Giao việc">
+                            <dxb:BarButtonItem
+                                Command="{Binding Cmd_Popup}"
+                                CommandParameter="pAddTask"
+                                Content="Thêm giao việc"
+                                Glyph="{dx:DXImage 'SvgImages/Icon Builder/Actions_Add.svg'}"
+                                LargeGlyph="{dx:DXImage 'SvgImages/Icon Builder/Actions_Add.svg'}" />
+
+                            <dxb:BarButtonItem
+                                Command="{Binding Cmd_Delete}"
+                                Content="Xóa giao việc"
+                                LargeGlyph="{dx:DXImage 'SvgImages/Icon Builder/Actions_Delete.svg'}" />
+                        </dxr:RibbonPageGroup>
+                    </dxr:RibbonPage>
+                </dxr:RibbonDefaultPageCategory>
+            </dxr:RibbonControl>
+
+            <dxg:GridControl
+                Grid.Row="1"
+                AutoGenerateColumns="None"
+                CurrentItem="{Binding TaskItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                EnableSmartColumnsGeneration="True"
+                ItemsSource="{Binding TaskList}"
+                SelectedItems="{Binding TaskSelect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                SelectionMode="Row">
+
+                <dxg:GridControl.TotalSummary>
+                    <dxg:GridSummaryItem
+                        Alignment="Left"
+                        DisplayFormat="{}{0}"
+                        SummaryType="Count">
+                        <dxg:GridSummaryItem.FixedTotalSummaryElementStyle>
+                            <Style TargetType="Run">
+                                <Setter Property="Text">
+                                    <Setter.Value>
+                                        <MultiBinding Mode="OneWay" StringFormat=" Đang chọn : {0}/{1} (Tổng: {2})">
+                                            <Binding Path="SelectedItems.Count" RelativeSource="{RelativeSource AncestorType=dxg:GridControl}" />
+                                            <Binding Path="Value" />
+                                            <Binding Path="ItemsSource.Count" RelativeSource="{RelativeSource AncestorType=dxg:GridControl}" />
+                                        </MultiBinding>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </dxg:GridSummaryItem.FixedTotalSummaryElementStyle>
+                    </dxg:GridSummaryItem>
+                </dxg:GridControl.TotalSummary>
+
+                <dxg:GridControl.View>
+                    <dxg:TableView
+                        AllowEditing="False"
+                        AutoWidth="True"
+                        NewItemRowPosition="None"
+                        SearchPanelHorizontalAlignment="Stretch"
+                        SearchPanelPosition="OverGroupPanel"
+                        ShowCheckBoxSelectorColumn="True"
+                        ShowFixedTotalSummary="True"
+                        ShowGroupPanel="False"
+                        ShowSearchPanelMode="Always"
+                        ShowSelectionRectangle="False">
+
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="MouseDoubleClick">
+                                <b:InvokeCommandAction Command="{Binding Cmd_Popup}" CommandParameter="pEditTask" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </dxg:TableView>
+                </dxg:GridControl.View>
+
+                <dxg:GridControl.Columns>
+                    <!--<dxg:GridColumn
+                        Width="Auto"
+                        FieldName="Photo"
+                        IsSmart="True">
+                        <dxg:GridColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Width="40"
+                                    Height="40"
+                                    Margin="10"
+                                    CornerRadius="20">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding Row.Photo, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill" />
+                                    </Border.Background>
+                                </Border>
+                            </DataTemplate>
+                        </dxg:GridColumn.CellTemplate>
+                    </dxg:GridColumn>-->
+
+                    <dxg:GridColumn FieldName="Ten" IsSmart="True" />
+                    <dxg:GridColumn FieldName="MoTa" IsSmart="True" />
+                    <dxg:GridColumn FieldName="NgayTao" IsSmart="True" />
+                    <dxg:GridColumn FieldName="Deadline" IsSmart="True" />
+                    <dxg:GridColumn FieldName="TrangThai" IsSmart="True" />
+                    <dxg:GridColumn FieldName="NguoiGiao.UserName" IsSmart="True" />
+                    <dxg:GridColumn FieldName="NguoiNhan.UserName" IsSmart="True" />
+                </dxg:GridControl.Columns>
+            </dxg:GridControl>
+        </Grid>
+    </dx:LoadingDecorator>
+
+
+</Page>
