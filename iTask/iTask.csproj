@@ -471,6 +471,7 @@
     </ApplicationDefinition>
     <Compile Include="Classes\clTask.cs" />
     <Compile Include="Classes\clUser.cs" />
+    <Compile Include="Converter\TrangThaiConverter.cs" />
     <Compile Include="EF\iTaskDbContext.cs" />
     <Compile Include="Models\mEF.cs" />
     <Compile Include="Models\mSQLServer.cs" />

@@ -83,5 +83,52 @@ namespace iTask.ViewModels.Pages
 
             }
         }
+
+        private ActionCommand cmd_UpdateData;
+
+        public ICommand Cmd_UpdateData
+        {
+            get
+            {
+                if (cmd_UpdateData == null)
+                {
+                    cmd_UpdateData = new ActionCommand(PerformCmd_UpdateData);
+                }
+
+                return cmd_UpdateData;
+            }
+        }
+
+        private async void PerformCmd_UpdateData()
+        {
+            try
+            {
+                bool IsSuccess = false;
+
+                if (this.Task.Id > 0 )
+                {
+                    IsSuccess = await mEF.UpdateTask(this.Task);
+                }
+                else
+                {
+                    IsSuccess = await mEF.AddTask(this.Task);
+
+                }
+
+
+                if (IsSuccess)
+                {
+                    var vmM = (App.Current.MainWindow.DataContext as vmMain);
+                    vmM.IsPopUp = false;
+                    vmM.PopUpFrameContent = null;
+
+                    (vmM.MainFrameContent.DataContext as vmGiaoViec).Cmd_LoadAll.Execute(null);
+                }
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

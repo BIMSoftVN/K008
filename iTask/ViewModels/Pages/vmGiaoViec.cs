@@ -138,5 +138,36 @@ namespace iTask.ViewModels.Pages
 
             }
         }
+
+        private ActionCommand cmd_Delete;
+
+        public ICommand Cmd_Delete
+        {
+            get
+            {
+                if (cmd_Delete == null)
+                {
+                    cmd_Delete = new ActionCommand(PerformCmd_Delete);
+                }
+
+                return cmd_Delete;
+            }
+        }
+
+        private async void PerformCmd_Delete()
+        {
+            try
+            {
+                var kq = await mEF.DeleteTask(TaskSelect.ToList());
+                if (kq == true)
+                {
+                    PerformCmd_LoadAll();
+                }    
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace iTask.Classes
     [Table("Tasks")]
     public class clTask : PropertyChangedBase
     {
-        private long _Id=0;
+        private long _Id= 0;
         public long Id
         {
             get

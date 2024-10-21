@@ -9,8 +9,8 @@
     xmlns:local="clr-namespace:iTask.ViewModels.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:p="clr-namespace:iTask.Properties"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:vm="clr-namespace:iTask.ViewModels.Pages"
-    Title="Thêm công việc"
     d:DesignHeight="450"
     d:DesignWidth="800"
     dx:ThemeManager.ThemeName="Win11Light"
@@ -19,6 +19,17 @@
     <Page.DataContext>
         <vm:vmTaskInfo />
     </Page.DataContext>
+
+    <Page.Style>
+        <Style TargetType="Page">
+            <Setter Property="Title" Value="Sửa thông tin" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Task.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                    <Setter Property="Title" Value="Thêm công việc" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Style>
 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
@@ -105,14 +116,39 @@
                     FontSize="14"
                     Text="Trạng thái" />
 
-                <TextBox
-                    Grid.Row="0"
-                    Grid.Column="2"
+                <ComboBox
+                    x:Name="SttCb"
                     Width="250"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     FontSize="14"
-                    Text="{Binding Task.TrangThai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    SelectedItem="{Binding Task.TrangThai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Kind="{Binding Converter={StaticResource TrangThaiIconConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Margin="0,0,5,0" Foreground="{Binding Converter={StaticResource TrangThaiColorConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBlock Foreground="{Binding Converter={StaticResource TrangThaiColorConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Converter={StaticResource TrangThaiConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                            
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <!--<dxe:ComboBoxEdit Width="250" FontSize="14"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Center"
+                                  x:Name="SttCb"
+                                  SelectedItem="{Binding Task.TrangThai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <dxe:ComboBoxEdit.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Foreground="Red"
+                                Text="{Binding Converter={StaticResource TrangThaiConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </dxe:ComboBoxEdit.ItemTemplate>
+                </dxe:ComboBoxEdit>-->
+
             </StackPanel>
 
             <StackPanel Margin="0,2" Orientation="Horizontal">
@@ -196,111 +232,23 @@
             </StackPanel>
 
 
-            <!--<Grid Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="5" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="5" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="5" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="5" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <TextBlock
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Text="{x:Static p:Resources.TenNguoiDung}" />
-
-                <TextBox
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Text="{Binding User.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                <TextBlock
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Text="Email" />
-
-                <TextBox
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Text="{Binding User.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                <TextBlock
-                    Grid.Row="4"
-                    Grid.Column="0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Text="{x:Static p:Resources.NgaySinh}" />
-
-                <dxe:DateEdit
-                    Grid.Row="4"
-                    Grid.Column="2"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    MaskType="DateOnly"
-                    MaskUseAsDisplayFormat="True"
-                    Text="{Binding User.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-            -->
-            <!--<DatePicker
-            Grid.Row="4"
-            Grid.Column="2"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Center"
-            FontSize="14"
-            SelectedDate="{Binding User.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
-
-            <!--<TextBox
-            Grid.Row="4"
-            Grid.Column="2"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Center"
-            FontSize="14"
-            Text="{Binding User.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
-            <!--
-
-                <TextBlock
-                    Grid.Row="6"
-                    Grid.Column="0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Text="{x:Static p:Resources.DiaChi}" />
-
-                <TextBox
-                    Grid.Row="6"
-                    Grid.Column="2"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Text="{Binding User.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            </Grid>-->
 
             <Button
                 Width="100"
                 Margin="20"
-                Command="{Binding Cmd_UpdateData}"
-                Content="Cập nhật" />
+                Command="{Binding Cmd_UpdateData}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Content" Value="Sửa" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Task.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                <Setter Property="Content" Value="Thêm" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

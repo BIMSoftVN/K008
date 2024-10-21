@@ -164,5 +164,100 @@ namespace iTask.Models
             return uList;
         }
 
+        public static async Task<bool> AddTask(clTask task)
+        {
+            var res = false;
+
+            try
+            {
+                if (App.dbContext.Database.CanConnect())
+                {
+                    var ngUser = await (from p in App.dbContext.Users where (p.Id == task.NguoiGiaoId) select p).FirstOrDefaultAsync();
+                    var nnUser = await (from p in App.dbContext.Users where (p.Id == task.NguoiNhanId) select p).FirstOrDefaultAsync();
+
+                    var task_Out = task.ShallowCopy();
+                    task_Out.NguoiGiao = ngUser;
+                    task_Out.NguoiNhan = nnUser;
+
+                    App.dbContext.Tasks.Add(task_Out);
+                    var kq = await App.dbContext.SaveChangesAsync();
+                    if (kq > 0)
+                    {
+                        res = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return res;
+        }
+
+        public static async Task<bool> UpdateTask(clTask task)
+        {
+            var res = false;
+            clTask task_out = null;
+
+            try
+            {
+                if (App.dbContext.Database.CanConnect())
+                {
+                    task_out = await App.dbContext.Tasks.FindAsync(task.Id);
+                    if (task_out != null)
+                    {
+                        task_out.Ten = task.Ten;
+                        task_out.MoTa = task.MoTa;
+                        task_out.NgayTao = task.NgayTao;
+                        task_out.Deadline = task.Deadline;
+                        task_out.TrangThai = task.TrangThai;
+                        task_out.NguoiGiaoId = task.NguoiGiaoId;
+                        task_out.NguoiNhanId = task.NguoiNhanId;
+
+                        var kq = await App.dbContext.SaveChangesAsync();
+                        if (kq > 0)
+                        {
+                            res = true;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return res;
+        }
+
+        public static async Task<bool> DeleteTask(List<clTask> taskList)
+        {
+            var res = false;
+            clUser user_out = null;
+
+            try
+            {
+                if (App.dbContext.Database.CanConnect())
+                {
+                    var idList = taskList.Select(x => x.Id).ToList();
+                    var delDb = await App.dbContext.Tasks.Where(x => idList.Contains(x.Id)).ToListAsync();
+
+                    App.dbContext.Tasks.RemoveRange(delDb);
+                    var kq = await App.dbContext.SaveChangesAsync();
+                    if (kq > 0)
+                    {
+                        res = true;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return res;
+        }
+
     }
 }

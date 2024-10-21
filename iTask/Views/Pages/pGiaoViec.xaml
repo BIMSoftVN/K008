@@ -10,8 +10,8 @@
     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
     xmlns:local="clr-namespace:iTask.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:iTask.ViewModels.Pages"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:vm="clr-namespace:iTask.ViewModels.Pages"
     Title="pNguoiDung"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -142,7 +142,21 @@
                     <dxg:GridColumn FieldName="MoTa" IsSmart="True" />
                     <dxg:GridColumn FieldName="NgayTao" IsSmart="True" />
                     <dxg:GridColumn FieldName="Deadline" IsSmart="True" />
-                    <dxg:GridColumn FieldName="TrangThai" IsSmart="True" />
+                    <dxg:GridColumn FieldName="TrangThai" IsSmart="True">
+                        <dxg:GridColumn.CellDisplayTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <md:PackIcon
+                                        Margin="0,0,5,0"
+                                        Foreground="{Binding Row.TrangThai, Converter={StaticResource TrangThaiColorConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Kind="{Binding Row.TrangThai, Converter={StaticResource TrangThaiIconConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Text="{Binding Row.TrangThai,Converter={StaticResource TrangThaiConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                               Foreground="{Binding Row.TrangThai, Converter={StaticResource TrangThaiColorConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </dxg:GridColumn.CellDisplayTemplate>
+                    </dxg:GridColumn>
                     <dxg:GridColumn FieldName="NguoiGiao.UserName" IsSmart="True" />
                     <dxg:GridColumn FieldName="NguoiNhan.UserName" IsSmart="True" />
                 </dxg:GridControl.Columns>
