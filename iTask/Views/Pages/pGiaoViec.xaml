@@ -6,6 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
     xmlns:local="clr-namespace:iTask.Views.Pages"
@@ -62,105 +64,272 @@
                                 Command="{Binding Cmd_Delete}"
                                 Content="Xóa giao việc"
                                 LargeGlyph="{dx:DXImage 'SvgImages/Icon Builder/Actions_Delete.svg'}" />
+
+
+                            <dxb:BarButtonItem
+                                Command="{Binding Cmd_Export}"
+                                Content="Xuất Excel"
+                                LargeGlyph="{dx:DXImage 'SvgImages/DiagramIcons/Redo.svg'}" />
+
                         </dxr:RibbonPageGroup>
                     </dxr:RibbonPage>
                 </dxr:RibbonDefaultPageCategory>
             </dxr:RibbonControl>
 
-            <dxg:GridControl
-                Grid.Row="1"
-                AutoGenerateColumns="None"
-                CurrentItem="{Binding TaskItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                EnableSmartColumnsGeneration="True"
-                ItemsSource="{Binding TaskList}"
-                SelectedItems="{Binding TaskSelect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                SelectionMode="Row">
+            <DockPanel Grid.Row="1">
+                <dxdo:DockLayoutManager
+                    ClosedPanelsBarPosition="Left"
+                    ClosedPanelsBarVisibility="Auto"
+                    ManualClosedPanelsBarVisibility="True">
+                    <dxdo:LayoutGroup Orientation="Horizontal">
+                        <dxdo:LayoutPanel Caption="Danh sách công việc" ItemWidth="2*">
+                            <dxg:GridControl
+                                Grid.Row="1"
+                                AutoGenerateColumns="None"
+                                CurrentItem="{Binding TaskItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                EnableSmartColumnsGeneration="True"
+                                ItemsSource="{Binding TaskList}"
+                                SelectedItems="{Binding TaskSelect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                SelectionMode="Row">
 
-                <dxg:GridControl.TotalSummary>
-                    <dxg:GridSummaryItem
-                        Alignment="Left"
-                        DisplayFormat="{}{0}"
-                        SummaryType="Count">
-                        <dxg:GridSummaryItem.FixedTotalSummaryElementStyle>
-                            <Style TargetType="Run">
-                                <Setter Property="Text">
-                                    <Setter.Value>
-                                        <MultiBinding Mode="OneWay" StringFormat=" Đang chọn : {0}/{1} (Tổng: {2})">
-                                            <Binding Path="SelectedItems.Count" RelativeSource="{RelativeSource AncestorType=dxg:GridControl}" />
-                                            <Binding Path="Value" />
-                                            <Binding Path="ItemsSource.Count" RelativeSource="{RelativeSource AncestorType=dxg:GridControl}" />
-                                        </MultiBinding>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </dxg:GridSummaryItem.FixedTotalSummaryElementStyle>
-                    </dxg:GridSummaryItem>
-                </dxg:GridControl.TotalSummary>
+                                <dxg:GridControl.TotalSummary>
+                                    <dxg:GridSummaryItem
+                                        Alignment="Left"
+                                        DisplayFormat="{}{0}"
+                                        SummaryType="Count">
+                                        <dxg:GridSummaryItem.FixedTotalSummaryElementStyle>
+                                            <Style TargetType="Run">
+                                                <Setter Property="Text">
+                                                    <Setter.Value>
+                                                        <MultiBinding Mode="OneWay" StringFormat=" Đang chọn : {0}/{1} (Tổng: {2})">
+                                                            <Binding Path="SelectedItems.Count" RelativeSource="{RelativeSource AncestorType=dxg:GridControl}" />
+                                                            <Binding Path="Value" />
+                                                            <Binding Path="ItemsSource.Count" RelativeSource="{RelativeSource AncestorType=dxg:GridControl}" />
+                                                        </MultiBinding>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </dxg:GridSummaryItem.FixedTotalSummaryElementStyle>
+                                    </dxg:GridSummaryItem>
+                                </dxg:GridControl.TotalSummary>
 
-                <dxg:GridControl.View>
-                    <dxg:TableView
-                        AllowEditing="False"
-                        AutoWidth="True"
-                        NewItemRowPosition="None"
-                        SearchPanelHorizontalAlignment="Stretch"
-                        SearchPanelPosition="OverGroupPanel"
-                        ShowCheckBoxSelectorColumn="True"
-                        ShowFixedTotalSummary="True"
-                        ShowGroupPanel="False"
-                        ShowSearchPanelMode="Always"
-                        ShowSelectionRectangle="False">
+                                <dxg:GridControl.View>
+                                    <dxg:TableView
+                                        AllowEditing="False"
+                                        AutoWidth="False"
+                                        NewItemRowPosition="None"
+                                        SearchPanelHorizontalAlignment="Stretch"
+                                        SearchPanelPosition="OverGroupPanel"
+                                        ShowCheckBoxSelectorColumn="True"
+                                        ShowFixedTotalSummary="True"
+                                        ShowGroupPanel="False"
+                                        ShowSearchPanelMode="Always"
+                                        ShowSelectionRectangle="False">
 
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="MouseDoubleClick">
-                                <b:InvokeCommandAction Command="{Binding Cmd_Popup}" CommandParameter="pEditTask" />
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </dxg:TableView>
-                </dxg:GridControl.View>
+                                        <dxg:TableView.CellStyle>
+                                            <Style TargetType="dxg:LightweightCellEditor">
+                                                <Setter Property="Foreground" Value="{Binding Row.TrangThai, Converter={StaticResource TrangThaiColorConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            </Style>
+                                        </dxg:TableView.CellStyle>
 
-                <dxg:GridControl.Columns>
-                    <!--<dxg:GridColumn
-                        Width="Auto"
-                        FieldName="Photo"
-                        IsSmart="True">
-                        <dxg:GridColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border
-                                    Width="40"
-                                    Height="40"
-                                    Margin="10"
-                                    CornerRadius="20">
-                                    <Border.Background>
-                                        <ImageBrush ImageSource="{Binding Row.Photo, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill" />
-                                    </Border.Background>
-                                </Border>
-                            </DataTemplate>
-                        </dxg:GridColumn.CellTemplate>
-                    </dxg:GridColumn>-->
 
-                    <dxg:GridColumn FieldName="Ten" IsSmart="True" />
-                    <dxg:GridColumn FieldName="MoTa" IsSmart="True" />
-                    <dxg:GridColumn FieldName="NgayTao" IsSmart="True" />
-                    <dxg:GridColumn FieldName="Deadline" IsSmart="True" />
-                    <dxg:GridColumn FieldName="TrangThai" IsSmart="True">
-                        <dxg:GridColumn.CellDisplayTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <md:PackIcon
-                                        Margin="0,0,5,0"
-                                        Foreground="{Binding Row.TrangThai, Converter={StaticResource TrangThaiColorConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                        Kind="{Binding Row.TrangThai, Converter={StaticResource TrangThaiIconConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <TextBlock Text="{Binding Row.TrangThai,Converter={StaticResource TrangThaiConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                               Foreground="{Binding Row.TrangThai, Converter={StaticResource TrangThaiColorConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                </StackPanel>
+                                        <b:Interaction.Triggers>
+                                            <b:EventTrigger EventName="MouseDoubleClick">
+                                                <b:InvokeCommandAction Command="{Binding Cmd_Popup}" CommandParameter="pEditTask" />
+                                            </b:EventTrigger>
+                                        </b:Interaction.Triggers>
+                                    </dxg:TableView>
+                                </dxg:GridControl.View>
 
-                            </DataTemplate>
-                        </dxg:GridColumn.CellDisplayTemplate>
-                    </dxg:GridColumn>
-                    <dxg:GridColumn FieldName="NguoiGiao.UserName" IsSmart="True" />
-                    <dxg:GridColumn FieldName="NguoiNhan.UserName" IsSmart="True" />
-                </dxg:GridControl.Columns>
-            </dxg:GridControl>
+                                <dxg:GridControl.Columns>
+                                    <dxg:GridColumn
+                                        Width="2*"
+                                        FieldName="Ten"
+                                        IsSmart="True" />
+                                    <dxg:GridColumn
+                                        Width="3*"
+                                        FieldName="MoTa"
+                                        IsSmart="True" />
+                                    <dxg:GridColumn
+                                        Width="1*"
+                                        FieldName="NgayTao"
+                                        IsSmart="True" />
+                                    <dxg:GridColumn
+                                        Width="1*"
+                                        FieldName="Deadline"
+                                        IsSmart="True" />
+                                    <dxg:GridColumn
+                                        Width="2*"
+                                        FieldName="TrangThai"
+                                        IsSmart="True">
+                                        <dxg:GridColumn.CellDisplayTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <md:PackIcon
+                                                        Margin="0,0,5,0"
+                                                        Foreground="{Binding Row.TrangThai, Converter={StaticResource TrangThaiColorConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        Kind="{Binding Row.TrangThai, Converter={StaticResource TrangThaiIconConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                    <TextBlock Foreground="{Binding Row.TrangThai, Converter={StaticResource TrangThaiColorConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Row.TrangThai, Converter={StaticResource TrangThaiConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                </StackPanel>
+
+                                            </DataTemplate>
+                                        </dxg:GridColumn.CellDisplayTemplate>
+                                    </dxg:GridColumn>
+                                    <dxg:GridColumn
+                                        Width="1*"
+                                        FieldName="NguoiGiao.UserName"
+                                        IsSmart="True" />
+                                    <dxg:GridColumn
+                                        Width="1*"
+                                        FieldName="NguoiNhan.UserName"
+                                        IsSmart="True" />
+                                </dxg:GridControl.Columns>
+                            </dxg:GridControl>
+                        </dxdo:LayoutPanel>
+
+                        <dxdo:LayoutPanel ItemWidth="1*">
+                            <dxc:ChartControl>
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title HorizontalAlignment="Center" Content="Tỷ lệ trạng thái" />
+                                </dxc:ChartControl.Titles>
+
+                                <dxc:SimpleDiagram2D>
+                                    <dxc:SimpleDiagram2D.Series>
+                                        <dxc:PieSeries2D
+                                            ArgumentDataMember="TrangThai"
+                                            ColorDataMember="Color"
+                                            DataSource="{Binding TTList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                            ValueDataMember="GiaTri">
+
+                                            <dxc:PieSeries2D.Label>
+                                                <dxc:SeriesLabel
+                                                    dxc:PieSeries.LabelPosition="Outside"
+                                                    RenderMode="RectangleConnectedToCenter"
+                                                    TextPattern="{}{A}: {V}"
+                                                    Visible="True" />
+                                            </dxc:PieSeries2D.Label>
+                                        </dxc:PieSeries2D>
+                                    </dxc:SimpleDiagram2D.Series>
+                                </dxc:SimpleDiagram2D>
+                            </dxc:ChartControl>
+                        </dxdo:LayoutPanel>
+                    </dxdo:LayoutGroup>
+                </dxdo:DockLayoutManager>
+            </DockPanel>
+
+            <!--<Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
+
+                <dxg:GridControl
+                    Grid.Row="1"
+                    AutoGenerateColumns="None"
+                    CurrentItem="{Binding TaskItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    EnableSmartColumnsGeneration="True"
+                    ItemsSource="{Binding TaskList}"
+                    SelectedItems="{Binding TaskSelect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    SelectionMode="Row">
+
+                    <dxg:GridControl.TotalSummary>
+                        <dxg:GridSummaryItem
+                            Alignment="Left"
+                            DisplayFormat="{}{0}"
+                            SummaryType="Count">
+                            <dxg:GridSummaryItem.FixedTotalSummaryElementStyle>
+                                <Style TargetType="Run">
+                                    <Setter Property="Text">
+                                        <Setter.Value>
+                                            <MultiBinding Mode="OneWay" StringFormat=" Đang chọn : {0}/{1} (Tổng: {2})">
+                                                <Binding Path="SelectedItems.Count" RelativeSource="{RelativeSource AncestorType=dxg:GridControl}" />
+                                                <Binding Path="Value" />
+                                                <Binding Path="ItemsSource.Count" RelativeSource="{RelativeSource AncestorType=dxg:GridControl}" />
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </dxg:GridSummaryItem.FixedTotalSummaryElementStyle>
+                        </dxg:GridSummaryItem>
+                    </dxg:GridControl.TotalSummary>
+
+                    <dxg:GridControl.View>
+                        <dxg:TableView
+                            AllowEditing="False"
+                            AutoWidth="False"
+                            NewItemRowPosition="None"
+                            SearchPanelHorizontalAlignment="Stretch"
+                            SearchPanelPosition="OverGroupPanel"
+                            ShowCheckBoxSelectorColumn="True"
+                            ShowFixedTotalSummary="True"
+                            ShowGroupPanel="False"
+                            ShowSearchPanelMode="Always"
+                            ShowSelectionRectangle="False">
+
+                            <dxg:TableView.CellStyle>
+                                <Style TargetType="dxg:LightweightCellEditor">
+                                    <Setter Property="Foreground" Value="{Binding Row.TrangThai, Converter={StaticResource TrangThaiColorConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Style>
+                            </dxg:TableView.CellStyle>
+
+
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="MouseDoubleClick">
+                                    <b:InvokeCommandAction Command="{Binding Cmd_Popup}" CommandParameter="pEditTask" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </dxg:TableView>
+                    </dxg:GridControl.View>
+
+                    <dxg:GridControl.Columns>
+                        <dxg:GridColumn
+                            Width="2*"
+                            FieldName="Ten"
+                            IsSmart="True" />
+                        <dxg:GridColumn
+                            Width="3*"
+                            FieldName="MoTa"
+                            IsSmart="True" />
+                        <dxg:GridColumn
+                            Width="1*"
+                            FieldName="NgayTao"
+                            IsSmart="True" />
+                        <dxg:GridColumn
+                            Width="1*"
+                            FieldName="Deadline"
+                            IsSmart="True" />
+                        <dxg:GridColumn
+                            Width="2*"
+                            FieldName="TrangThai"
+                            IsSmart="True">
+                            <dxg:GridColumn.CellDisplayTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <md:PackIcon
+                                            Margin="0,0,5,0"
+                                            Foreground="{Binding Row.TrangThai, Converter={StaticResource TrangThaiColorConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Kind="{Binding Row.TrangThai, Converter={StaticResource TrangThaiIconConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Foreground="{Binding Row.TrangThai, Converter={StaticResource TrangThaiColorConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Row.TrangThai, Converter={StaticResource TrangThaiConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    </StackPanel>
+
+                                </DataTemplate>
+                            </dxg:GridColumn.CellDisplayTemplate>
+                        </dxg:GridColumn>
+                        <dxg:GridColumn
+                            Width="1*"
+                            FieldName="NguoiGiao.UserName"
+                            IsSmart="True" />
+                        <dxg:GridColumn
+                            Width="1*"
+                            FieldName="NguoiNhan.UserName"
+                            IsSmart="True" />
+                    </dxg:GridControl.Columns>
+                </dxg:GridControl>
+            </Grid>-->
+
         </Grid>
     </dx:LoadingDecorator>
 

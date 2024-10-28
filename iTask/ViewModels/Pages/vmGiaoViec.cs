@@ -1,4 +1,5 @@
-﻿using iTask.Classes;
+﻿using DevExpress.CodeParser;
+using iTask.Classes;
 using iTask.Models;
 using iTask.Views.Pages;
 using K008Libs.Mvvm;
@@ -6,15 +7,35 @@ using K008Libs.Objects;
 using Microsoft.Xaml.Behaviors.Core;
 using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace iTask.ViewModels.Pages
 {
     public class vmGiaoViec : PropertyChangedBase
     {
+
+        private ObservableRangeCollection<clTTChart> _TTList = new ObservableRangeCollection<clTTChart>();
+        public ObservableRangeCollection<clTTChart> TTList
+        {
+            get
+            {
+                return _TTList;
+            }
+            set
+            {
+                _TTList = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private ObservableRangeCollection<clTask> _TaskList = new ObservableRangeCollection<clTask>();
         public ObservableRangeCollection<clTask> TaskList
         {
@@ -84,6 +105,47 @@ namespace iTask.ViewModels.Pages
 
                 TaskList.AddRange(tList);
 
+                DrawChart();
+
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void DrawChart()
+        {
+            try
+            {
+                TTList.Clear();
+                TTList.Add(new clTTChart
+                {
+                    TrangThai = "Chưa thực hiện",
+                    Color = Brushes.Gray,
+                    GiaTri = TaskList.Where(o => o.TrangThai == TrangThai.ChuaThucHien).Count()
+                });
+
+                TTList.Add(new clTTChart
+                {
+                    TrangThai = "Đang thực hiện",
+                    Color = Brushes.Blue,
+                    GiaTri = TaskList.Where(o => o.TrangThai == TrangThai.DangThucHien).Count()
+                });
+
+                TTList.Add(new clTTChart
+                {
+                    TrangThai = "Hoàn thành",
+                    Color = Brushes.Green,
+                    GiaTri = TaskList.Where(o => o.TrangThai == TrangThai.HoanThanh).Count()
+                });
+
+                TTList.Add(new clTTChart
+                {
+                    TrangThai = "Hủy bỏ",
+                    Color = Brushes.Red,
+                    GiaTri = TaskList.Where(o => o.TrangThai == TrangThai.HuyBo).Count()
+                });
             }
             catch
             {
@@ -165,6 +227,62 @@ namespace iTask.ViewModels.Pages
                 }    
             }
             catch
+            {
+
+            }
+        }
+
+        private ActionCommand cmd_Export;
+
+        public ICommand Cmd_Export
+        {
+            get
+            {
+                if (cmd_Export == null)
+                {
+                    cmd_Export = new ActionCommand(PerformCmd_Export);
+                }
+
+                return cmd_Export;
+            }
+        }
+
+        private void PerformCmd_Export()
+        {
+            try
+            {
+                if (TaskSelect!=null && TaskSelect.Count>0)
+                {
+                    var ExcelApp = new Excel.Application();
+                    ExcelApp.Visible = true;
+
+                    var wb = ExcelApp.Workbooks.Add();
+                    Excel.Worksheet ws = wb.Sheets[1];
+
+                    long i = 1;
+
+                    ws.Range["A"+i].Value = "STT";
+                    ws.Range["B" + i].Value = "Tên công tác";
+                    ws.Range["C" + i].Value = "Trạng Thái";
+                    ws.Range["D" + i].Value = "Người giao";
+                    ws.Range["E" + i].Value = "Người nhận";
+
+                    foreach (var task in TaskSelect)
+                    {
+                        i++;
+                        ws.Range["A" + i].Value = i-1;
+                        ws.Range["B" + i].Value = task.Ten;
+                        ws.Range["C" + i].Value = task.TrangThai.ToString();
+                        ws.Range["D" + i].Value = task.NguoiGiao.UserName;
+                        ws.Range["E" + i].Value = task.NguoiNhan.UserName;
+                    }
+                }   
+                else
+                {
+                    MessageBox.Show("Hãy chọn công tác");
+                }    
+            }
+            catch (Exception ex)
             {
 
             }

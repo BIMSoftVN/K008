@@ -470,6 +470,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\clTask.cs" />
+    <Compile Include="Classes\clTTChart.cs" />
     <Compile Include="Classes\clUser.cs" />
     <Compile Include="Converter\TrangThaiConverter.cs" />
     <Compile Include="EF\iTaskDbContext.cs" />
