@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTask", "iTask\iTask.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K008Libs", "K008Libs\K008Libs.csproj", "{3CC79C2A-179B-45E7-9F02-0C6DA82CDD3C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelAddIn", "ExcelAddIn\ExcelAddIn.csproj", "{F7637F7C-0D73-465F-98AD-30FE809E9A34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelWorkbook", "ExcelWorkbook\ExcelWorkbook.csproj", "{F49C9629-A8AB-480B-B628-80EA6AD26364}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{3CC79C2A-179B-45E7-9F02-0C6DA82CDD3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CC79C2A-179B-45E7-9F02-0C6DA82CDD3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CC79C2A-179B-45E7-9F02-0C6DA82CDD3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7637F7C-0D73-465F-98AD-30FE809E9A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7637F7C-0D73-465F-98AD-30FE809E9A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7637F7C-0D73-465F-98AD-30FE809E9A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7637F7C-0D73-465F-98AD-30FE809E9A34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F49C9629-A8AB-480B-B628-80EA6AD26364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F49C9629-A8AB-480B-B628-80EA6AD26364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F49C9629-A8AB-480B-B628-80EA6AD26364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F49C9629-A8AB-480B-B628-80EA6AD26364}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
