@@ -36,9 +36,9 @@
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.button1 = this.Factory.CreateRibbonButton();
             this.tb_KinhDo = this.Factory.CreateRibbonEditBox();
             this.tb_ViDo = this.Factory.CreateRibbonEditBox();
+            this.button1 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -58,23 +58,26 @@
             this.group1.Label = "group1";
             this.group1.Name = "group1";
             // 
-            // button1
-            // 
-            this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.button1.Label = "Lấy thời tiết";
-            this.button1.Name = "button1";
-            this.button1.ShowImage = true;
-            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
-            // 
             // tb_KinhDo
             // 
             this.tb_KinhDo.Label = "Kinh độ";
             this.tb_KinhDo.Name = "tb_KinhDo";
+            this.tb_KinhDo.Text = "105.83466785969901";
             // 
             // tb_ViDo
             // 
             this.tb_ViDo.Label = "Vĩ độ";
             this.tb_ViDo.Name = "tb_ViDo";
+            this.tb_ViDo.Text = "21.03683972227193";
+            // 
+            // button1
+            // 
+            this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.button1.Image = global::ExcelWorkbook.Properties.Resources.Weather;
+            this.button1.Label = "Lấy thời tiết";
+            this.button1.Name = "button1";
+            this.button1.ShowImage = true;
+            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
             // 
             // Ribbon1
             // 
