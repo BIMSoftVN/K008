@@ -487,6 +487,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Test\clTest.cs" />
     <Compile Include="ViewModels\Pages\vmAccInfo.cs" />
     <Compile Include="ViewModels\Pages\vmGiaoViec.cs" />
     <Compile Include="ViewModels\Pages\vmImportExcel.cs" />

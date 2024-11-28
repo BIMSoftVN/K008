@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelAddIn", "ExcelAddIn\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelWorkbook", "ExcelWorkbook\ExcelWorkbook.csproj", "{F49C9629-A8AB-480B-B628-80EA6AD26364}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CADNet", "CADNet\CADNet.csproj", "{836EBD58-F48C-4BB7-BE19-7305922D9A20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{F49C9629-A8AB-480B-B628-80EA6AD26364}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F49C9629-A8AB-480B-B628-80EA6AD26364}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F49C9629-A8AB-480B-B628-80EA6AD26364}.Release|Any CPU.Build.0 = Release|Any CPU
+		{836EBD58-F48C-4BB7-BE19-7305922D9A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{836EBD58-F48C-4BB7-BE19-7305922D9A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{836EBD58-F48C-4BB7-BE19-7305922D9A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{836EBD58-F48C-4BB7-BE19-7305922D9A20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
