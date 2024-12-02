@@ -2,10 +2,13 @@
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Runtime;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Documents;
 using Application = Autodesk.AutoCAD.ApplicationServices.Application;
+using Exception = System.Exception;
 
 namespace CADNet.TKC
 {
@@ -88,16 +91,48 @@ namespace CADNet.TKC
                             }
                         }
 
+                        //var bList = new List<clBlockInfo>();
+
                         var win = new vMain();
                         var vmWin = (vmMain)win.DataContext;
 
+
+                        BlockTable blockTable = tr.GetObject(aDb.BlockTableId, OpenMode.ForRead) as BlockTable;
+                        if (blockTable != null)
+                        {
+                            foreach (var blockId in blockTable)
+                            {
+                                BlockTableRecord blockRec = tr.GetObject(blockId, OpenMode.ForRead) as BlockTableRecord;
+                                if (blockRec != null)
+                                {
+                                    if (blockRec.Name == "TK_Title")
+                                    {
+                                        vmWin.TitleId = blockRec.Id;    
+                                    }
+
+                                    if (blockRec.Name == "TK_Body")
+                                    {
+                                        vmWin.BodyId = blockRec.Id;
+                                    }
+                                }
+                            }
+                        }
+
+
+                        
                         vmWin.cocSource.Clear();
                         vmWin.cocSource.AddRange(cocList);
 
-                        win.ShowDialog();
+                        //vmWin.BlockSource.Clear();
+                        //vmWin.BlockSource.AddRange(bList);
+
+                        win.Show();
 
                     
                     }
+                
+
+                
                 }    
 
                 

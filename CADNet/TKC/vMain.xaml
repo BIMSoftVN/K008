@@ -28,12 +28,21 @@
             </dxg:GridControl.View>
         </dxg:GridControl>
 
+        <StackPanel Grid.Column="1">
+            <ComboBox Margin="10"
+                      DisplayMemberPath="Name"
+                      ItemsSource="{Binding BlockSource}"
+                      SelectedItem="{Binding BlockItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </ComboBox>
 
-        <Button Grid.Column="1"
-                Height="30"
-                Width="120"
-                Content="Vẽ bảng"
-                VerticalAlignment="Top"
-                Command="{Binding Cmd_VeBang}"/>
+
+            <Button 
+         Height="30"
+         Width="120"
+         Content="Vẽ bảng"
+         VerticalAlignment="Top"
+         Command="{Binding Cmd_VeBang}"/>
+        </StackPanel>
+       
     </Grid>
 </Window>
