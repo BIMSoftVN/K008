@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CADNet", "CADNet\CADNet.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EtabsAddIns", "EtabsAddIns\EtabsAddIns.csproj", "{8BF3C82D-7DC5-490E-86C5-9472CC5407EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitApp", "RevitApp\RevitApp.csproj", "{4E953B39-A674-4910-8593-DA51D0B6AC87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{8BF3C82D-7DC5-490E-86C5-9472CC5407EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BF3C82D-7DC5-490E-86C5-9472CC5407EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BF3C82D-7DC5-490E-86C5-9472CC5407EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E953B39-A674-4910-8593-DA51D0B6AC87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E953B39-A674-4910-8593-DA51D0B6AC87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E953B39-A674-4910-8593-DA51D0B6AC87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E953B39-A674-4910-8593-DA51D0B6AC87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

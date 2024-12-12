@@ -1,0 +1,19 @@
+﻿<RevitAddIns>
+	<AddIn Type="Command">
+		<Name>RevitAppCommand</Name>
+		<Assembly>K008/RevitApp.dll</Assembly>
+		<FullClassName>RevitApp.DrawWall</FullClassName>
+		<AddInId>e51cbd48-defa-4adb-a2c9-f980a1b3d1e6</AddInId>
+		<VendorId>Kỹ Sư Đỗ</VendorId>
+		<VendorDescription>Hà Đông</VendorDescription>
+	</AddIn>
+
+	<AddIn Type="Application">
+		<Name>RevitAppApplication</Name>
+		<Assembly>K008/RevitApp.dll</Assembly>
+		<FullClassName>RevitApp.App</FullClassName>
+		<AddInId>d9ee2d99-032c-47b5-847a-f03008f5efb9</AddInId>
+		<VendorId>Kỹ Sư Đỗ</VendorId>
+		<VendorDescription>Hà Đông</VendorDescription>
+	</AddIn>
+</RevitAddIns>
