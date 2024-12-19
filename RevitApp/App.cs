@@ -35,6 +35,17 @@ namespace RevitApp
 
             Panel.AddItem(btnData);
 
+
+            btnData = new PushButtonData("OpenWindow", "Mở cửa sổ", AssemblyName, "RevitApp.ImportCAD.OpenWindow");
+            btnData.ToolTip = "Mở cửa sổ";
+
+            ImgPath = "RevitApp.Photo.OpenedFolder.png";
+
+            btnData.LargeImage = RersourceToImg.ConvertWithHeight(ImgPath, 32, 32);
+            btnData.Image = RersourceToImg.ConvertWithHeight(ImgPath, 16, 16);
+
+            Panel.AddItem(btnData);
+
             return Result.Succeeded;
         }
     }
